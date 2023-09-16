@@ -52,18 +52,20 @@ export class Printer {
 
     if (typeof stringOrArgs === "string") {
       string += groupIndent;
-      string += this.format(stringOrArgs);
+      string += this.format(stringOrArgs)
+        .replaceAll("\n", "\n" + groupIndent);
     } else {
       const args = stringOrArgs;
 
       for (let i = 0; i < args.length; ++i) {
         const arg = args[i];
+
         if (i > 0) string += " ";
 
         string += groupIndent;
-        string += this.usefulFormatting
-          ? this.format(arg)
-          : this.genericFormat(arg);
+        string +=
+          (this.usefulFormatting ? this.format(arg) : this.genericFormat(arg))
+            .replaceAll("\n", "\n" + groupIndent);
       }
     }
 
