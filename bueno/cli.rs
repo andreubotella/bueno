@@ -56,6 +56,7 @@ pub fn parse_cli() {
             if let Err(error) = runtime.block_on(bueno_run(&module_path, options)) {
                 // TODO: better looking errors
                 eprintln!("error: {}", error);
+                std::process::exit(1);
             }
         }
         _ => unreachable!(),
